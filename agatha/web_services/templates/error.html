@@ -1,0 +1,17 @@
+{% extends "base.html" %} {% block content %} {{ super() }}
+<div class="row mx-2 my-3 gx-5">
+  <div>
+    <h4 class="fw-bold float-start">Error {{ code }} – {{ message }}</h4>
+    <button
+      onclick="location.href='javascript:history.back()'"
+      type="btn"
+      class="btn btn-outline-primary float-end btn-sm"
+    >
+      Return
+    </button>
+  </div>
+</div>
+<div class="text-center">
+  <img src="https://http.cat/{{ code }}" alt="{{ code }}" class="img-fluid" />
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block script %}
+<script type="text/python" src={{ url_for("static", path="py/gadgets/image_question.py" ) }}>
+</script>
+{% endblock script %}
+{% block content %}
+
+{% import 'gadgets/image_question.html' as image_question %}
+{{ image_question.quiz(
+    url_for("static", path="img/gadgets/iqTemplate/"),
+    "question.jpg",
+    choices) }}
+{% endblock content %}

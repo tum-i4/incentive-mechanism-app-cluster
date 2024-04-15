@@ -1,0 +1,11 @@
+version: "3.9"
+
+services:
+  agatha:
+    image: gitlab.lrz.de:5005/pypracticum/incentive-mechanism:latest
+    ports:
+      - 5442:5442
+    env_file:
+      - prod.env
+    volumes:
+      - ./agatha.db:/agatha.db

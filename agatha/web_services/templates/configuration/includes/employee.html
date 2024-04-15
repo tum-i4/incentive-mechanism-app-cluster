@@ -1,0 +1,40 @@
+{% macro edit(employee, delivery_models, incentive_types, prefix) -%}
+<div class="mx-3">
+  <form action={{ prefix + "/submit_employee_model" }} method="POST">
+    <div class="mb-2 row">
+      <label for="id-input" class="col-4 col-form-label">Revolori ID</label>
+      <div class="col-8">
+        <input id="id-input" type="text" readonly class="form-control-plaintext" name="revolori_id" value={{
+          employee.revolori_id }} />
+      </div>
+    </div>
+    <div class="mb-2 row">
+      <label for="delivery-select" class="col-4 col-form-label">Delivery Model</label>
+      <div class="col-8">
+        <select id="delivery-select" class="form-select" name="delivery">
+          {% for delivery_model in delivery_models %}
+          <option id={{ "d-option-" + delivery_model.id|string }} value={{ delivery_model.id }}
+            class="{% if delivery_model.id == employee.d_id %}selected{% endif %}">{{
+            delivery_model.name.capitalize() }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <div class="mb-2 row">
+      <label for="incentive-select" class="col-4 col-form-label">Incentive Type</label>
+      <div class="col-8">
+        <select id="incentive-select" class="form-select" name="incentive">
+          {% for incentive_type in incentive_types %}
+          <option id={{ "i-option-" + incentive_type.id|string }} value={{ incentive_type.id }}
+            class="{% if incentive_type.id == employee.i_id %}selected{% endif %}">{{
+            incentive_type.name.capitalize() }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <div class="mt-3 text-center">
+      <button id="submit-btn" type="submit" class="btn btn-primary">Confirm</button>
+    </div>
+  </form>
+</div>
+{%- endmacro %}

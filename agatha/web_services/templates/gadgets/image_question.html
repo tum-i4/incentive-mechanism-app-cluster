@@ -1,0 +1,13 @@
+{% macro quiz(path, question, choices) -%}
+<div>
+  <img class="mb-1" src={{path + question}} style="border: black 1px solid" alt="question" width="435" height="260">
+  <div style="height: 225px; width: 500px">
+  <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: flex-start">
+    {% for choice in choices %}
+        <button class={{ choice.type }}>
+          <img  src={{ path + choice.name }} alt="choice" width="200" height="110">
+        </button>
+    {% endfor %}
+    </div>
+</div>
+{%- endmacro %}

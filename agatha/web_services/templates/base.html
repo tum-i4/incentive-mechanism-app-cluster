@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% block head %}
+  {% endblock %}
+  <link rel="icon" type="image/png" href={{ url_for("static", path="img/favicon.png" ) }} />
+  <link rel="stylesheet" href={{ url_for("static", path="css/styles.css" ) }} />
+  <script type="text/javascript" src={{ url_for("static", path="js/brython.min.js" ) }}></script>
+  <script type="text/javascript" src={{ url_for("static", path="js/brython_stdlib.js" ) }}></script>
+</head>
+
+<body onload="brython()">
+  {% block script %}
+  {% endblock %}
+  <nav class="navbar bg-primary text-white shadow px-5">
+    <div class="d-flex w-100 justify-content-between">
+      <span>
+        <span class="navbar-brand fw-bold me-2">Agatha</span>
+        <span class="border border-white rounded fw-lighter badge">{{service_name}}</span>
+      </span>
+      {% block meta %}
+      {% endblock %}
+    </div>
+  </nav>
+  {% block progress %}
+  {% endblock %}
+  <div class="container-lg">
+    <div class="mx-5 my-4">
+      {% block content %}
+      {% endblock %}
+    </div>
+  </div>
+</body>
+
+</html>

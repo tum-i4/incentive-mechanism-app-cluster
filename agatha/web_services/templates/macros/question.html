@@ -1,0 +1,37 @@
+{% macro questions(questions) -%}
+{% for question in questions %}
+<div q_id="{{question.id}}" class="box question d-none">
+  <div class="container pt-3 pb-2 px-4 d-flex justify-content-between">
+    <div class="w-50">
+      <p class="question-style">{{ question.question }}</p>
+    </div>
+    <div class="w-50 ms-5 px-2">
+      {% if question.answer_type.short_name == "free text" %}
+      <input class="form-control text-input" type="text" q_id="{{question.id}}"></input>
+      {% else %}
+      <div id="buttons-5" class="d-flex justify-content-between pb-2">
+        <button style="visibility: hidden"></button>
+        {% if question.answer_type.most_positive >= question.answer_type.most_negative %}
+        {% for index in range(question.answer_type.most_negative, question.answer_type.most_positive+1) %}
+        <button class="choice-button w-100" type="button" q_id="{{question.id}}">{{index}}</button>
+        {% endfor %}
+        {% else %}
+        {% for index in range(question.answer_type.most_positive, question.answer_type.most_negative+1) %}
+        <button class="choice-button w-100" type="button" q_id="{{question.id}}">{{index}}</button>
+        {% endfor %}
+        {% endif %}
+        <button style="visibility: hidden"></button>
+      </div>
+      <div class="row">
+        <span class="col text-start">strongly disagree</span>
+        {% if (question.answer_type.most_positive - question.answer_type.most_negative) is even %}
+        <span class="col text-center">neutral</span>
+        {% endif %}
+        <span class="col text-end">strongly agree</sapan>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endfor %}
+{% endmacro %}

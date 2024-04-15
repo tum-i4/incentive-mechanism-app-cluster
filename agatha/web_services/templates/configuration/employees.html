@@ -1,0 +1,47 @@
+{% extends "configuration/layout.html" %}
+{% block content %}
+{{ super() }}
+<script type="text/python" src={{ url_for("static", path="py/employees.py" ) }}></script>
+<div class="m-3">
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="col-3" scope="col">ID</th>
+        <th scope="col-3">Survey Result</th>
+        <th scope="col-2">Delivery Model</th>
+        <th scope="col-2">Incentive</th>
+        <th scope="col-2">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for employee in employees %}
+      <tr>
+        <td class="align-middle">{{ employee.revolori_id }}</td>
+        <td class="align-middle">{{ "Completed" if employee.survey else "N/A" }}</td>
+        <td class="align-middle">{{ employee.delivery if employee.delivery else "N/A" }}</td>
+        <td class="align-middle">{{ employee.incentive if employee.incentive else "N/A" }}</td>
+        <td class="align-middle">
+          <button id={{ "config-" + employee.revolori_id }} type="link" class="btn btn-link p-0 toggle-btn">
+            Configure
+          </button>
+        </td>
+      </tr>
+      <div id={{ "modal-" + employee.revolori_id }} class="modal" tabindex="-1">
+        <div class="modal-dialog position-absolute top-50 start-50 translate-middle">
+          <div class="modal-content">
+            <div class="modal-header">
+              <span class="fw-bold">Edit Employee</span>
+              <button id={{ "cancel-" + employee.revolori_id }} type="button" class="btn-close toggle-btn" />
+            </div>
+            <div class="modal-body">
+              {% import 'configuration/includes/employee.html' as employee_config %}
+              {{ employee_config.edit(employee, delivery_models, incentive_types, prefix)}}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

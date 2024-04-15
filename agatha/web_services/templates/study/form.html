@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% block content %}
+<form action={{ prefix + "/" + user_uuid }} method="POST">
+  {% import 'study/includes/input.html' as input %}
+  {% import 'study/includes/radio.html' as radio %}
+  {% import 'study/includes/input.html' as input %}
+  {% import 'study/includes/select.html' as select %}
+  <div class="mb-3 row">
+    {% for question in questions %}
+    {% if question.type == "input" %}
+    {{ input.input(question.name, question.input_type, question.max, question.min, question.required)}}
+    {% elif question.type == "radio" %}
+    {{ radio.radio(question.name, question.options, question.required)}}
+    {% else %}
+    {{ select.select(question.name, question.options, question.required) }}
+    {% endif %}
+    {% endfor %}
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

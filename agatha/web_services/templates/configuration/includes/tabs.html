@@ -1,0 +1,13 @@
+{% set tab_list = ["Employees", "Mechanisms"] %}
+{% macro tabs(active_tab, prefix) -%}
+<ul class="nav nav-tabs px-3">
+  {% for tab in tab_list %}
+  {% set href = prefix + "/" + tab.casefold() %}
+  <li class="nav-item">
+    <a class="nav-link {% if active_tab.casefold() == tab.casefold() %}active{% endif %}" href={{ href }}>
+      {{tab}}
+    </a>
+  </li>
+  {% endfor %}
+</ul>
+{%- endmacro %}

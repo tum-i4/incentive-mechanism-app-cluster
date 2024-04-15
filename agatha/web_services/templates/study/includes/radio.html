@@ -1,0 +1,21 @@
+{% macro radio(label, choices, required) -%}
+<div class="col-sm-2">
+  <label class="form-label text-capitalize">{{label}}</label>
+</div>
+<div class="col-sm-10 mb-3">
+  {% for choice in choices %}
+  <div class="form-check form-check-inline">
+    <input
+      class="form-check-input"
+      type="radio"
+      value="{{choice}}"
+      name="{{label.replace(' ', '_')}}"
+      {% if required %}
+      required
+      {% endif %}
+    />
+    <label class="form-check-label"> {{choice}} </label>
+  </div>
+  {% endfor %}
+</div>
+{%- endmacro %}

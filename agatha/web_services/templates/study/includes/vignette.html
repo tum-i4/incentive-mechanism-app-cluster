@@ -1,0 +1,10 @@
+{% macro vignettes(vignettes) -%}
+{% for vignette_id, vignette_text in vignettes.items() %}
+  <!-- vignette -->
+  <div v_id="{{vignette_id}}" class="box text-center vignette d-none">
+    <div class="pl-2 pr-2">
+      <p class="question-style">{{ vignette_text }}</p>
+    </div>
+  </div>
+{% endfor %}
+{%- endmacro %}

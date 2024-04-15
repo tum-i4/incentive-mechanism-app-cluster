@@ -1,0 +1,57 @@
+{% extends 'base.html' %} {% block script %}
+<script type="text/python" src='{{ url_for("static", path="py/questions.py" ) }}' id="questions"></script>
+<script type="text/python" src='{{ url_for("static", path="py/study.py" ) }}' id="study"></script>
+<script type="text/python">
+  from study import Study
+  study = Study()
+  study.update_vignette_display()
+</script>
+{% endblock script %}
+{% block progress %}
+<div id="progress-bar">
+  &nbsp;
+</div>
+{% endblock progress %}
+{% block content %}
+<!-- questionnaire -->
+<div class="survey-container">
+  <!-- vignette-header -->
+  <div class="box text-center" id="category">
+    <h3>Scenario</h3>
+  </div>
+  <!-- vignettes -->
+  {% import 'study/includes/vignette.html' as vignette %}
+  {{ vignette.vignettes( vignettes )}}
+  <!-- questions-header -->
+  <div class="box text-center" id="category">
+    <h3>Questions</h3>
+  </div>
+  <!-- questions -->
+  <div id="questions">
+    {% import 'macros/question.html' as question %}
+    {{ question.questions(questions)}}</div>
+  <div class="box text-center" id="message" style="display: none" id="category">
+    <h5 class="mt-4 mb-4"></h5>
+  </div>
+  <!-- navigation -->
+  <div id="navigation" class="box box-decorator pb-4 pt-4">
+    <button
+      id="next"
+      disabled
+      type="submit"
+      style="margin-right: 30px; padding-right: 20px; padding-left: 20px"
+      class="btn btn-primary float-end"
+    >
+      Next
+    </button>
+    <button
+      id="submit"
+      type="submit"
+      style="display: none; margin-right: 30px; padding-right: 20px; padding-left: 20px"
+      class="btn btn-primary float-end"
+    >
+      Submit
+    </button>
+  </div>
+</div>
+{% endblock content %}

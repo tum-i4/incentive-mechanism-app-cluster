@@ -1,0 +1,32 @@
+{% extends "configuration/layout.html" %}
+{% block content %}
+{{ super() }}
+<script type="text/python" src={{ url_for("static", path="py/mechanism.py" ) }}></script>
+<div class="row mx-2 my-3 gx-5">
+  <div class="col">
+    <div>
+      <h4 class="fw-bold float-start">Delivery Models</h4>
+      <button id="delivery_model-add" type="btn" class="btn btn-outline-primary float-end btn-sm toggle-btn">
+        Add New Model
+      </button>
+    </div>
+    <br /><br />
+    {% import 'configuration/includes/accordion.html' as accordion %}
+    {{ accordion.accordion("delivery_model", delivery_models, prefix)}}
+    {% import 'configuration/includes/mechanism_modals.html' as modal %}
+    {{ modal.modal("add", "delivery_model", "", prefix) }}
+  </div>
+
+  <div class="col">
+    <h4 class="fw-bold float-start">Incentive Types</h4>
+    <button id="incentive_type-add" type="btn" class="btn btn-outline-primary float-end btn-sm toggle-btn">
+      Add New Incentive
+    </button>
+    <br /><br />
+    {% import 'configuration/includes/accordion.html' as accordion %}
+    {{ accordion.accordion("incentive_type", incentive_types, prefix)}}
+    {% import 'configuration/includes/mechanism_modals.html' as modal %}
+    {{ modal.modal("add", "incentive_type", "", prefix) }}
+  </div>
+</div>
+{% endblock %}

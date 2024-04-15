@@ -1,0 +1,22 @@
+{% macro input(label, type, max, min, required) -%}
+<label class="form-label col-sm-2 col-form-label text-capitalize">
+  {{label}}
+</label>
+<div class="col-sm-10">
+  <input
+    {% if required %}
+    required
+    {% endif %}
+    type="{{type}}"
+    {% if type == "number"%}
+    max="{{max}}"
+    min="{{min}}"
+    {% else %}
+    maxlength="{{max}}"
+    minlength="{{min}}"
+    {% endif %}
+    class="form-control w-25 mb-3"
+    name="{{label.replace(' ', '_')}}"
+  />
+</div>
+{%- endmacro %}

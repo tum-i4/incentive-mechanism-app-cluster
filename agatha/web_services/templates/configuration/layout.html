@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block head %}
+<title>Agatha Admin - Employees</title>
+{% endblock %}
+{% block meta %}
+<script type="text/python" src={{ url_for("static", path="py/logout.py" ) }} id="logout"></script>
+<span class="d-flex align-items-center">
+  <span class="me-2">{{ request.cookies.get(auth_key) }}</span>
+  {% if not dev %}
+  <button id="logout-btn" type="button" class="btn btn-primary">Log out</button>
+  {% endif %}
+</span>
+{% endblock %}
+{% block content %}
+{% import 'configuration/includes/tabs.html' as tabs %}
+{{ tabs.tabs((request.url|string()).split('/')[5], prefix) }}
+{% endblock %}

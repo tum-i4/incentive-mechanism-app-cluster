@@ -1,0 +1,91 @@
+{% macro edit(category, item, prefix) -%}
+<div>
+  <form action={{ prefix + "/submit_" + category }} method="POST">
+    <div class="mb-2 row">
+      <label for="id-input" class="col-4 col-form-label">
+        {{ category.capitalize() | replace("_", " ") + " ID" }}
+      </label>
+      <div class="col-8">
+        <input id="id-input" type="text" readonly class="form-control-plaintext" name="item_id" value={{ item.id|string
+          }}>
+      </div>
+    </div>
+    <div class="mb-2 row">
+      <label for="name-input" class="col-4 col-form-label">
+        Name
+      </label>
+      <div class="col-8">
+        <input id="name-input" type="text" class="form-control" value="{{ item.name }}" name="name" required>
+      </div>
+    </div>
+    <div class="mb-2 row">
+      <label for="desc-input" class="col-4 col-form-label">
+        Description
+      </label>
+      <div class="col-8">
+        <textarea id="desc-input" type="text" rows="5" class="form-control"
+          name="description">{% if item.description %}{{ item.description.capitalize() }}{% endif %}</textarea>
+      </div>
+    </div>
+    <div class="mt-3 text-center">
+      <button id={{ category + "-save-" + item.id|string }} type="submit" class="btn btn-outline-primary w-50">
+        Save changes
+      </button>
+    </div>
+  </form>
+</div>
+{%- endmacro %}
+
+{% macro add(category, prefix) -%}
+<div>
+  <form action={{ prefix + "/create_" + category }} method="POST">
+    <div class="mb-2 row">
+      <label for="name-input" class="col-4 col-form-label">
+        Name
+      </label>
+      <div class="col-8">
+        <input id="name-input" type="text" class="form-control" value="" name="name" required>
+      </div>
+    </div>
+    <div class="mb-2 row">
+      <label for="desc-input" class="col-4 col-form-label">
+        Description
+      </label>
+      <div class="col-8">
+        <textarea id="desc-input" type="text" rows="5" class="form-control" name="description"></textarea>
+      </div>
+    </div>
+    <div class="mt-3 text-center">
+      <button id={{ category + "-save" }} type="submit" class="btn btn-outline-primary w-50">
+        Create {{ category.capitalize() | replace("_", " ") }}
+      </button>
+    </div>
+  </form>
+</div>
+{%- endmacro %}
+
+{% macro modal(operation, category, item, prefix) -%}
+<div
+  id="{% if operation == 'add' %}{{ category + '-modal' }}{% else %}{{ category + '-modal-' + item.id|string }}{% endif %}"
+  class="modal" tabindex="-1">
+  <div class="modal-dialog position-absolute top-50 start-50 translate-middle">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="fw-bold">{{ operation.capitalize() }} {{ category.title() | replace("_", " ") }}</span>
+        {% if operation == "add" %}
+        <button id={{ category + "-cancel" }} type="button" class="btn-close toggle-btn" />
+        {% else %}
+        <button id={{ category + "-cancel-" + item.id|string }} type="button" class="btn-close toggle-btn" />
+        {% endif %}
+      </div>
+      <div class="modal-body">
+        {% if operation == "add" %}
+        {{ add(category, prefix) }}
+        {% else %}
+        {{ edit(category, item, prefix) }}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{%- endmacro %}

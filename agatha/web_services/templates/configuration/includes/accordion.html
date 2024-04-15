@@ -1,0 +1,26 @@
+{% macro accordion(category, items, prefix) -%}
+<div class="accordion">
+  {% for item in items %}
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button id={{ category + "-header-" + item.id|string }} class="accordion-button collapsed" type="button">
+        {{ item.name.capitalize() }}
+        <a id={{ category + "-edit-" + item.id|string }} type="button"
+          class="btn btn-outline-primary btn-sm float-end ms-3 toggle-btn">Edit</a>
+      </button>
+    </h2>
+    <div id={{ category + "-body-" + item.id|string }} class="accordion-collapse collapse">
+      <div class="accordion-body">
+        {% if item.description %}
+        {{ item.description.capitalize() }}
+        {% else %}
+        <p class="text-muted text-center">No description</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% import 'configuration/includes/mechanism_modals.html' as modal %}
+  {{ modal.modal("edit", category, item, prefix) }}
+  {% endfor %}
+</div>
+{%- endmacro %}

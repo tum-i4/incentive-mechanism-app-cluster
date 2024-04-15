@@ -1,0 +1,36 @@
+FROM python:3.8-slim as builder
+
+# python
+ENV PYTHONUNBUFFERED=1
+# pip:
+ENV PIP_NO_CACHE_DIR=1
+ENV PIP_DISABLE_PIP_VERSION_CHECK=1
+ENV PIP_DEFAULT_TIMEOUT=100
+# poetry:
+ENV POETRY_NO_INTERACTION=1
+ENV POETRY_VIRTUALENVS_IN_PROJECT=true
+
+RUN pip install "poetry>=1.1.13,<2.0.0"
+
+WORKDIR /incentive-mechanism
+
+COPY poetry.lock pyproject.toml ./
+
+RUN poetry install --no-dev --no-ansi
+
+# ==============================================================================
+
+FROM python:3.8-slim as production
+
+WORKDIR /incentive-mechanism
+
+COPY --from=builder /incentive-mechanism/.venv /incentive-mechanism/.venv
+
+ENV PATH=/incentive-mechanism/.venv/bin:$PATH
+
+COPY executables executables
+COPY agatha agatha
+
+EXPOSE 5442
+
+CMD ["python", "executables/run-agatha.py", "--host", "0.0.0.0", "--no-poetry"]

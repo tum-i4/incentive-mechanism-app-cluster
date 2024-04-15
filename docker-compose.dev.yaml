@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  agatha:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - 5442:5442
+    env_file:
+      - dev.env
+    volumes:
+      - ./agatha:/incentive-mechanism/agatha
+      - ./executables:/incentive-mechanism/executables
