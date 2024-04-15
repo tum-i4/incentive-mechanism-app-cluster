@@ -2,8 +2,6 @@
 
 This repository contains the source code for an incentive mechanism that chooses between different incentive delivery methods and incentives in an automated manner.
 
-[TOC]
-
 ## Prerequisites
 
 Before setting up and running the app, please make sure that:
