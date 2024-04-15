@@ -84,3 +84,11 @@ python executables/run-agatha.py
 |                                                                                                                                                    | Submit the survey and go to endpoint `/incentives/{random_uid}`   | Calculated configuration returned                                                                                                                                         |
 | Survey for given user is already filled out                                                                                                        | Go to survey endpoint with the same survey id and random id again | Display error message: survey already completed                                                                                                                           |
 | The same survey is already completed in another tab                                                                                                | Submit it again                                                   | Shows "something went wrong"                                                                                                                                              |
+
+## Contributors
+
+- [@vauhochzett](https://github.com/vauhochzett/)
+- Leonhard Zirus
+- Stephan Schmiedmayer
+- Nour Bouzid
+- Yanjie Li
