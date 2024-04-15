@@ -26,6 +26,12 @@ Execute the run script in `executables` with `python`:
 python executables/run-agatha.py
 ```
 
+## Component Diagram
+
+![Incentive Mechanism App Cluster Component Diagram](system_model_study_extension.png)
+
+Diagram created by Stephan Schmiedmayer
+
 ## Example Usage / Manual Testing
 
 ### Run Script Test
