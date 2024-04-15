@@ -26,7 +26,7 @@ Execute the run script in `executables` with `python`:
 python executables/run-agatha.py
 ```
 
-## Manual Testing
+## Example Usage / Manual Testing
 
 ### Run Script Test
 
